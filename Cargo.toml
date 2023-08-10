@@ -3,9 +3,14 @@ name = "local-atlas-data-api"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-axum = "0.6.20"
-mongodb = "2.6.0"
+anyhow = "1.0.72"
+axum = { version = "0.6.20", features = ["tracing"] }
+clap = { version = "4.3.21", features = ["derive"] }
+mongodb = { version = "2.6.0", features = ["tracing-unstable"] }
 tokio = { version = "1.30.0", features = ["tokio-macros", "rt-multi-thread", "signal"] }
+serde = { version = "1.0.183", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = "0.2"
+serde_json = "1"
+thiserror = "1.0.44"
