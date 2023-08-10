@@ -16,7 +16,7 @@ pub async fn start(args: &Cli) -> anyhow::Result<()> {
 
     let listen_address: SocketAddr = args.listen_address().parse()?;
 
-    println!("Listening on {listen_address}");
+    tracing::info!("Listening on {listen_address}");
 
     axum::Server::bind(&listen_address)
         .serve(app.into_make_service())

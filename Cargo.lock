@@ -877,7 +877,6 @@ dependencies = [
  "mongodb",
  "serde",
  "serde_json",
- "thiserror",
  "tokio",
  "tracing",
  "tracing-subscriber",

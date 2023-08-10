@@ -30,6 +30,8 @@ pub async fn handler(
     State(state): State<Arc<AppState>>,
     Json(payload): Json<Request>,
 ) -> Result<Json<Response>, Error> {
+    tracing::info!("incoming findOne query: {payload:?}");
+
     let options = FindOneOptions::builder()
         .projection(Some(payload.projection))
         .build();
@@ -42,5 +44,9 @@ pub async fn handler(
         .await?
         .unwrap_or(Value::Null);
 
-    Ok(Json(Response { document }))
+    let response = Response { document };
+
+    tracing::info!("responded with: {response:?}");
+
+    Ok(Json(response))
 }
