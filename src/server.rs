@@ -1,4 +1,5 @@
 mod find_one;
+mod normalize;
 mod state;
 
 pub use state::AppState;

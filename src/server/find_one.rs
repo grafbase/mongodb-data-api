@@ -5,7 +5,7 @@ use mongodb::{bson::Document, options::FindOneOptions};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::error::Error;
+use crate::{error::Error, server::normalize};
 
 use super::AppState;
 
@@ -43,6 +43,11 @@ pub async fn handler(
         .find_one(payload.filter, Some(options))
         .await?
         .unwrap_or(Value::Null);
+
+    let document = match document {
+        Value::Object(object) => Value::Object(normalize::ejson_to_json(object)),
+        value => value,
+    };
 
     let response = Response { document };
 
