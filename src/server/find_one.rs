@@ -39,15 +39,12 @@ pub async fn handler(
     let document = state
         .mongo()
         .database(&payload.database)
-        .collection::<Value>(&payload.collection)
+        .collection::<Document>(&payload.collection)
         .find_one(payload.filter, Some(options))
         .await?
+        .map(normalize::document_to_json)
+        .map(Value::Object)
         .unwrap_or(Value::Null);
-
-    let document = match document {
-        Value::Object(object) => Value::Object(normalize::ejson_to_json(object)),
-        value => value,
-    };
 
     let response = Response { document };
 
