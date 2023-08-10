@@ -1,3 +1,4 @@
+mod find_many;
 mod find_one;
 mod normalize;
 mod state;
@@ -13,6 +14,7 @@ pub async fn start(args: &Cli) -> anyhow::Result<()> {
 
     let app = Router::new()
         .route(&atlas_route("findOne"), post(find_one::handler))
+        .route(&atlas_route("find"), post(find_many::handler))
         .with_state(Arc::new(state));
 
     let listen_address: SocketAddr = args.listen_address().parse()?;
