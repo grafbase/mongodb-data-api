@@ -1,0 +1,10 @@
+.direnv
+.git
+.github
+.envrc
+.gitignore
+docker-compose.yml
+Dockerfile
+flake.*
+scripts
+target
