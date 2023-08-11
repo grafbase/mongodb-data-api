@@ -1,6 +1,0 @@
-{
-  "dataSource": "grafbase",
-  "database": "test",
-  "collection": "test",
-  "documents": [{ "foo": "bar" }, { "foo": "lolbar" }]
-}

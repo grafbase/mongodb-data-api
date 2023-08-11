@@ -1,12 +1,15 @@
 [package]
-name = "local-atlas-data-api"
+name = "mongodb-atlas-data-api"
 description = "A local MongoDB Atlas Data API for testing"
 license = "Apache-2.0"
-version = "0.1.1"
+version = "0.1.2"
 repository = "https://github.com/grafbase/mongodb-data-api"
 edition = "2021"
 readme = "README.md"
 keywords = ["mongodb"]
+
+[[bin]]
+name = "mongodb-atlas-data-api"
 
 [dependencies]
 anyhow = "1.0.72"

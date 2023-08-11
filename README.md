@@ -1,4 +1,4 @@
-# Local MongoDB Atlas Data API
+# MongoDB Atlas Data API
 
 A small server serving MongoDB Atlas Data API for test usage.
 Connects to MongoDB using TCP and provides an HTTP API, which
@@ -11,7 +11,7 @@ everything.
 ## Usage
 
 ```console
-Usage: local-atlas-data-api [OPTIONS] --mongodb-url <MONGODB_URL>
+Usage: mongodb-atlas-data-api [OPTIONS] --mongodb-url <MONGODB_URL>
 
 Options:
       --hostname <HOSTNAME>        [default: 127.0.0.1]
@@ -25,7 +25,7 @@ To connect to a MongoDB instance, pass the URL as a parameter to
 the API:
 
 ```console
-> local-atlas-data-api --mongodb-url "mongodb://grafbase:grafbase@localhost:27018"
+> mongodb-atlas-data-api --mongodb-url "mongodb://grafbase:grafbase@localhost:27018"
 ```
 
 This connects to the MongoDB defined in the provided docker-compose

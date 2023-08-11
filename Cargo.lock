@@ -886,23 +886,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57bcfdad1b858c2db7c38303a6d2ad4dfaf5eb53dfeb0910128b2c26d6158503"
 
 [[package]]
-name = "local-atlas-data-api"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "axum",
- "base64 0.21.2",
- "clap",
- "futures",
- "mongodb",
- "serde",
- "serde_json",
- "tokio",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
 name = "lock_api"
 version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1042,6 +1025,23 @@ dependencies = [
  "typed-builder",
  "uuid",
  "webpki-roots",
+]
+
+[[package]]
+name = "mongodb-atlas-data-api"
+version = "0.1.2"
+dependencies = [
+ "anyhow",
+ "axum",
+ "base64 0.21.2",
+ "clap",
+ "futures",
+ "mongodb",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]
