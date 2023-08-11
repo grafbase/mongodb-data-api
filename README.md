@@ -11,7 +11,7 @@ everything.
 ## Usage
 
 ```console
-Usage: mongodb-atlas-data-api [OPTIONS] --mongodb-url <MONGODB_URL>
+Usage: mongodb-data-api [OPTIONS] --mongodb-url <MONGODB_URL>
 
 Options:
       --hostname <HOSTNAME>        [default: 127.0.0.1]
@@ -25,7 +25,7 @@ To connect to a MongoDB instance, pass the URL as a parameter to
 the API:
 
 ```console
-> mongodb-atlas-data-api --mongodb-url "mongodb://grafbase:grafbase@localhost:27018"
+> mongodb-data-api --mongodb-url "mongodb://grafbase:grafbase@localhost:27018"
 ```
 
 This connects to the MongoDB defined in the provided docker-compose

@@ -1,5 +1,5 @@
 [package]
-name = "mongodb-atlas-data-api"
+name = "mongodb-data-api"
 description = "A local MongoDB Atlas Data API for testing"
 license = "Apache-2.0"
 version = "0.1.2"
@@ -9,7 +9,7 @@ readme = "README.md"
 keywords = ["mongodb"]
 
 [[bin]]
-name = "mongodb-atlas-data-api"
+name = "mongodb-data-api"
 
 [dependencies]
 anyhow = "1.0.72"
