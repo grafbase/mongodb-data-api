@@ -32,6 +32,11 @@ This connects to the MongoDB defined in the provided docker-compose
 file. When the service is running (the default address is http:/127.0.0.1:3000),
 you can start sending requests to it.
 
+## Docker
+
+The repository contains an example docker-compose file for using the API together with a local
+MongoDB.
+
 ### Find One
 
 [Official documentation](https://www.mongodb.com/docs/atlas/app-services/data-api/openapi/#operation/findOne)

@@ -1,8 +1,7 @@
 version: "3"
 services:
   data-api:
-    # image: aeb2831fb89f5412042029d44228512bccc74b81c868e8e2cf6746787cfc7c71
-    build: .
+    image: juliusdb/mongodb-atlas-data-api:latest
     restart: always
     environment:
       MONGODB_DATABASE_URL: "mongodb://grafbase:grafbase@mongodb:27017"
