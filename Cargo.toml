@@ -1,7 +1,12 @@
 [package]
 name = "local-atlas-data-api"
+description = "A local MongoDB Atlas Data API for testing"
+license = "Apache-2.0"
 version = "0.1.0"
+repository = "https://github.com/grafbase/tiberius"
 edition = "2021"
+readme = "README.md"
+keywords = ["mongodb"]
 
 [dependencies]
 anyhow = "1.0.72"
