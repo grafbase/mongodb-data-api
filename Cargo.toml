@@ -2,8 +2,8 @@
 name = "local-atlas-data-api"
 description = "A local MongoDB Atlas Data API for testing"
 license = "Apache-2.0"
-version = "0.1.0"
-repository = "https://github.com/grafbase/tiberius"
+version = "0.1.1"
+repository = "https://github.com/grafbase/mongodb-data-api"
 edition = "2021"
 readme = "README.md"
 keywords = ["mongodb"]
@@ -11,7 +11,7 @@ keywords = ["mongodb"]
 [dependencies]
 anyhow = "1.0.72"
 axum = { version = "0.6.20", features = ["tracing"] }
-clap = { version = "4.3.21", features = ["derive"] }
+clap = { version = "4.3.21", features = ["derive", "env"] }
 mongodb = { version = "2.6.0", features = ["tracing-unstable"] }
 tokio = { version = "1.30.0", features = ["tokio-macros", "rt-multi-thread"] }
 serde = { version = "1.0.183", features = ["derive"] }

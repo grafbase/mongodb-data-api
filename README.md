@@ -1,6 +1,9 @@
 # Local MongoDB Atlas Data API
 
 A small server serving MongoDB Atlas Data API for test usage.
+Connects to MongoDB using TCP and provides an HTTP API, which
+might be useful if TCP is not available.
+
 Please do not use in production, skips everything else except
 things we might need in the CI. Super unsafe, probably destroys
 everything.
