@@ -1,5 +1,13 @@
+mod aggregate;
+mod delete_many;
+mod delete_one;
 mod find_many;
 mod find_one;
+mod insert_many;
+mod insert_one;
+mod update_many;
+mod update_one;
+
 mod normalize;
 mod state;
 
@@ -15,6 +23,13 @@ pub async fn start(args: &Cli) -> anyhow::Result<()> {
     let app = Router::new()
         .route(&atlas_route("findOne"), post(find_one::handler))
         .route(&atlas_route("find"), post(find_many::handler))
+        .route(&atlas_route("insertOne"), post(insert_one::handler))
+        .route(&atlas_route("insertMany"), post(insert_many::handler))
+        .route(&atlas_route("updateOne"), post(update_one::handler))
+        .route(&atlas_route("updateMany"), post(update_many::handler))
+        .route(&atlas_route("deleteOne"), post(delete_one::handler))
+        .route(&atlas_route("deleteMany"), post(delete_many::handler))
+        .route(&atlas_route("aggregate"), post(aggregate::handler))
         .with_state(Arc::new(state));
 
     let listen_address: SocketAddr = args.listen_address().parse()?;
