@@ -15,7 +15,13 @@ mod state;
 pub use state::AppState;
 
 use crate::cli::Cli;
-use axum::{routing::post, Router};
+use axum::{
+    http::{header::CONTENT_TYPE, Request, StatusCode},
+    middleware::{self, Next},
+    response::{IntoResponse, Response},
+    routing::post,
+    Router,
+};
 use std::{net::SocketAddr, sync::Arc};
 
 pub async fn start(args: &Cli) -> anyhow::Result<()> {
@@ -32,6 +38,7 @@ pub async fn start(args: &Cli) -> anyhow::Result<()> {
         .route(&atlas_route("deleteMany"), post(delete_many::handler))
         .route(&atlas_route("aggregate"), post(aggregate::handler))
         .route(&atlas_route("dropDatabase"), post(drop_database::handler))
+        .layer(middleware::from_fn(convert_content_type))
         .with_state(Arc::new(state));
 
     let listen_address: SocketAddr = args.listen_address().parse()?;
@@ -43,6 +50,30 @@ pub async fn start(args: &Cli) -> anyhow::Result<()> {
         .await?;
 
     Ok(())
+}
+
+async fn convert_content_type<B>(mut request: Request<B>, next: Next<B>) -> Response {
+    match request
+        .headers()
+        .get(CONTENT_TYPE)
+        .and_then(|header| header.to_str().ok())
+    {
+        Some("application/ejson") | Some("application/json") => (),
+        _ => {
+            let response = (
+                StatusCode::BAD_REQUEST,
+                "Only application/ejson and application/json content types accepted.",
+            );
+
+            return response.into_response();
+        }
+    }
+
+    request
+        .headers_mut()
+        .insert(CONTENT_TYPE, "application/json".parse().unwrap());
+
+    next.run(request).await
 }
 
 fn atlas_route(action: &str) -> String {
