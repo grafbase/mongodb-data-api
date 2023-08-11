@@ -35,7 +35,7 @@ you can start sending requests to it.
 ## Docker
 
 The repository contains an example docker-compose file for using the API together with a local
-MongoDB.
+MongoDB. The image can be found from [Docker Hub](https://hub.docker.com/repository/docker/grafbase/mongodb-data-api/).
 
 ### Find One
 
@@ -154,7 +154,7 @@ MongoDB.
 [Official documentation](https://www.mongodb.com/docs/atlas/app-services/data-api/openapi/#operation/deleteOne)
 
 ```console
-curl --request POST \
+> curl --request POST \
   'http://127.0.0.1:3000/app/data-test/endpoint/data/v1/action/deleteOne' \
   --header 'apiKey: TEST' \
   --header 'Content-Type: application/json' \
@@ -172,7 +172,7 @@ curl --request POST \
 [Official documentation](https://www.mongodb.com/docs/atlas/app-services/data-api/openapi/#operation/deleteMany)
 
 ```console
-curl --request POST \
+> curl --request POST \
   'http://127.0.0.1:3000/app/data-test/endpoint/data/v1/action/deleteMany' \
   --header 'apiKey: TEST' \
   --header 'Content-Type: application/json' \
@@ -190,3 +190,19 @@ curl --request POST \
 [Official documentation](https://www.mongodb.com/docs/atlas/app-services/data-api/openapi/#operation/aggregate)
 
 We don't really need this (yet). It's implemented in this service, but not tested.
+
+### Drop Database
+
+This is an unofficial command, but useful for cleaning up after a test is run. Drops the database defined in the request.
+
+```console
+> curl --request POST \
+  'http://127.0.0.1:3000/app/data-test/endpoint/data/v1/action/dropDatabase' \
+  --header 'apiKey: TEST' \
+  --header 'Content-Type: application/json' \
+  --header 'Accept: application/json' \
+  --data-raw '{
+      "dataSource": "grafbase",
+      "database": "test"
+  }'
+```
