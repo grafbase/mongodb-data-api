@@ -35,6 +35,11 @@ impl From<mongodb::error::Error> for Error {
 
                 Self::BadRequest(value)
             }
+            ErrorKind::Command(error) => {
+                let value = json!({ "error": error.message, "error_code": "InvalidArgument", "link": "string" });
+
+                Self::BadRequest(value)
+            }
             ErrorKind::Authentication { message, .. } => {
                 let value =
                     json!({ "error": message, "error_code": "InvalidSession", "link": "string" });
