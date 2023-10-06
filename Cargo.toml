@@ -12,7 +12,7 @@ keywords = ["mongodb"]
 name = "mongodb-data-api"
 
 [dependencies]
-anyhow = "1.0.72"
+anyhow = "1.0.75"
 axum = { version = "0.6.20", features = ["tracing"] }
 clap = { version = "4.3.21", features = ["derive", "env"] }
 mongodb = { version = "2.6.0", features = ["tracing-unstable"] }
