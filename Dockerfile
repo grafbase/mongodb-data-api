@@ -1,4 +1,4 @@
-FROM rust:1.71
+FROM rust:1.73
 COPY . /usr/src/
 WORKDIR "/usr/src"
 RUN cargo build --release && mv target/release/mongodb-data-api /usr/local/ && rm -rf /usr/src
