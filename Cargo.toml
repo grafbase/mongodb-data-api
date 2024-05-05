@@ -13,7 +13,7 @@ name = "mongodb-data-api"
 
 [dependencies]
 anyhow = "1.0.75"
-axum = { version = "0.6.20", features = ["tracing"] }
+axum = { version = "0.7.0", features = ["tracing"] }
 clap = { version = "4.3.21", features = ["derive", "env"] }
 mongodb = { version = "2.7.0", features = ["tracing-unstable"] }
 tokio = { version = "1.31.0", features = ["tokio-macros", "rt-multi-thread"] }
