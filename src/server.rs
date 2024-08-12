@@ -16,13 +16,15 @@ pub use state::AppState;
 
 use crate::cli::Cli;
 use axum::{
-    http::{header::CONTENT_TYPE, Request, StatusCode},
+    extract::Request,
+    http::{header::CONTENT_TYPE, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
     routing::post,
     Router,
 };
 use std::{net::SocketAddr, sync::Arc};
+use tokio::signal;
 
 pub async fn start(args: &Cli) -> anyhow::Result<()> {
     let state = AppState::new(args).await?;
@@ -42,17 +44,18 @@ pub async fn start(args: &Cli) -> anyhow::Result<()> {
         .with_state(Arc::new(state));
 
     let listen_address: SocketAddr = args.listen_address().parse()?;
+    let listener = tokio::net::TcpListener::bind(listen_address).await.unwrap();
 
     tracing::info!("Listening on {listen_address}");
 
-    axum::Server::bind(&listen_address)
-        .serve(app.into_make_service())
+    axum::serve(listener, app)
+        .with_graceful_shutdown(shutdown_signal())
         .await?;
 
     Ok(())
 }
 
-async fn convert_content_type<B>(mut request: Request<B>, next: Next<B>) -> Response {
+async fn convert_content_type(mut request: Request, next: Next) -> Response {
     match request
         .headers()
         .get(CONTENT_TYPE)
@@ -78,4 +81,29 @@ async fn convert_content_type<B>(mut request: Request<B>, next: Next<B>) -> Resp
 
 fn atlas_route(action: &str) -> String {
     format!("/app/data-test/endpoint/data/v1/action/{action}")
+}
+
+async fn shutdown_signal() {
+    let ctrl_c = async {
+        signal::ctrl_c()
+            .await
+            .expect("failed to install Ctrl+C handler");
+    };
+
+    #[cfg(unix)]
+    let terminate = async {
+        signal::unix::signal(signal::unix::SignalKind::terminate())
+            .expect("failed to install signal handler")
+            .recv()
+            .await;
+    };
+
+    #[cfg(not(unix))]
+    let terminate = std::future::pending::<()>();
+
+    tokio::select! {
+        _ = ctrl_c => {},
+        _ = terminate => {},
+    }
+    println!("Shutting down gracefully...");
 }
