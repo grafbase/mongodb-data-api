@@ -15,7 +15,7 @@ name = "mongodb-data-api"
 anyhow = "1.0.75"
 axum = { version = "0.7", features = ["tracing"] }
 clap = { version = "4", features = ["derive", "env"] }
-mongodb = { version = "2", features = ["tracing-unstable"] }
+mongodb = { version = "3", features = ["tracing-unstable"] }
 tokio = { version = "1", features = ["tokio-macros", "rt-multi-thread", "signal"] }
 serde = { version = "1", features = ["derive"] }
 tracing = "0.1"
